@@ -2,8 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// Abstract class acting as a base for all hospital roles.
 abstract class Person {
-    
+    // Private fields with protected/public accessors.
     private String id;
     private String name;
     private int age;
@@ -18,8 +19,10 @@ abstract class Person {
     public int getAge() { return age; }
     public String getId() { return id; }
 
+    // Abstract method enforcing specific behavior in child classes
     public abstract void performRole();
     
+    // Overriding toString for easier printing
     @Override
     public String toString() {
         return "[" + id + "] " + name + " (" + age + " yrs)";
@@ -34,9 +37,16 @@ class Doctor extends Person {
         this.specialization = specialization;
     }
 
+    // Doctor specific implementation
     @Override
     public void performRole() {
         System.out.println("Doctor " + getName() + " (" + specialization + ") is seeing patients.");
+    }
+
+    // Overriding toString to show Doctor details in the list
+    @Override
+    public String toString() {
+        return super.toString() + " - [Doctor: " + specialization + "]";
     }
 
     public void diagnosePatient(Patient p, String disease) {
@@ -57,11 +67,17 @@ class Nurse extends Person {
     public void performRole() {
         System.out.println("Nurse " + getName() + " is on " + shift + " shift checking vitals.");
     }
+
+    // Overriding toString to show Nurse details in the list
+    @Override
+    public String toString() {
+        return super.toString() + " - [Nurse: " + shift + " Shift]";
+    }
 }
 
 class Patient extends Person {
     private String illness;
-    private String diagnosis;
+    private String diagnosis; // Encapsulated: Only set by doctor
     private boolean admitted;
 
     public Patient(String id, String name, int age, String illness) {
@@ -90,7 +106,9 @@ class Patient extends Person {
 }
 
 class HospitalUtils {
+    // Same method name 'findPerson', different parameters
     
+    // Search by ID only
     public static Person findPerson(List<Person> people, String id) {
         for (Person p : people) {
             if (p.getId().equalsIgnoreCase(id)) {
@@ -100,6 +118,7 @@ class HospitalUtils {
         return null;
     }
 
+    // Search by Name and Age (Overloaded) - helpful if two people have same name
     public static Person findPerson(List<Person> people, String name, int age) {
         for (Person p : people) {
             if (p.getName().equalsIgnoreCase(name) && p.getAge() == age) {
@@ -111,19 +130,21 @@ class HospitalUtils {
 }
 
 class HospitalBilling {
-
+    
+    // Standard Bill
     public void generateBill(Patient p, double amount) {
-        System.out.println("\n--- FINAL BILL ---");
-        System.out.println("Patient: " + p.getName());
-        System.out.println("Total Amount: $" + amount);
+        System.out.println("\n\t\t\t\t\t    --- FINAL BILL ---");
+        System.out.println("\t\t\t\t\tPatient: " + p.getName());
+        System.out.println("\t\t\t\t\tTotal Amount: $" + amount);
     }
 
+    // Discounted Bill (Insurance)
     public void generateBill(Patient p, double amount, double insuranceCoverage) {
-        System.out.println("\n--- FINAL BILL (INSURANCE APPLIED) ---");
-        System.out.println("Patient: " + p.getName());
-        System.out.println("Base Amount: $" + amount);
-        System.out.println("Insurance Paid: -$" + insuranceCoverage);
-        System.out.println("Patient Pays: $" + (amount - insuranceCoverage));
+        System.out.println("\n\t\t\t\t\t  --- FINAL BILL (INSURANCE APPLIED) ---");
+        System.out.println("\t\t\t\t\tPatient: " + p.getName());
+        System.out.println("\t\t\t\t\tBase Amount: BDT" + amount);
+        System.out.println("\t\t\t\t\tInsurance Paid: -BDT" + insuranceCoverage);
+        System.out.println("\t\t\t\t\tPatient Pays: BDT" + (amount - insuranceCoverage));
     }
 }
 
@@ -133,141 +154,178 @@ public class HospitalManagementSystem {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-    
-        staffList.add(new Doctor("D001", "Rahmina Akhter", 45, "Cardiology"));
-        staffList.add(new Doctor("D002", "Sharif Hossain", 50, "Neurology"));
-        staffList.add(new Doctor("D003", "Syeda Ishrat", 35, "Dermatologist"));
-        staffList.add(new Doctor("D004", "Md. Mizanur Rahman", 61, "General Physician"));
-        staffList.add(new Nurse("N001", "Hafisa Naznin", 29, "Night"));
-        staffList.add(new Nurse("N002", "Nasrin Farjana", 25, "Night"));
-        staffList.add(new Nurse("N003", "Samira Shifa", 24, "Day"));
-        staffList.add(new Nurse("N004", "Yusuf Hamid", 28, "Day"));
+        // Pre-populating some data 
+        staffList.add(new Doctor("D001", "Dr. Anisur Rahman", 45, "Cardiology"));
+        staffList.add(new Doctor("D002", "Dr. Fatema Begum", 50, "Neurology"));
+        staffList.add(new Doctor("D003", "Dr. Kamal Hossain", 55, "Orthopedics"));
+        staffList.add(new Doctor("D004", "Dr. Nasreen Sultana", 40, "Pediatrics"));
+
+        staffList.add(new Nurse("N001", "Shirin Akter", 29, "Night"));
+        staffList.add(new Nurse("N002", "Rahim Uddin", 32, "Day"));
+        staffList.add(new Nurse("N003", "Salma Khatun", 25, "Morning"));
+        staffList.add(new Nurse("N004", "Joya Das", 27, "Evening"));
         
-        patientList.add(new Patient("P001", "Ahmed Shafi", 30, "Dengue"));
+        patientList.add(new Patient("P001", "Rafiqul Islam", 30, "Chest Pain"));
+        patientList.add(new Patient("P002", "Karim Ahmed", 45, "High Fever"));
+        patientList.add(new Patient("P003", "Sumaiya Parvin", 22, "Dengue"));
+        patientList.add(new Patient("P004", "Amit Roy", 12, "Fracture"));
 
         boolean running = true;
         while (running) {
-            System.out.println("\n    HOSPITAL MANAGEMENT SYSTEM    ");
-            System.out.println("                                    ");
-            System.out.println("1. Register New Patient");
-            System.out.println("2. View All Staff");
-            System.out.println("3. View All Patients");
-            System.out.println("4. Doctor Diagnosis");
-            System.out.println("5. Generate Bil");
-            System.out.println("6. Search Person");
-            System.out.println("7. Exit");
-            System.out.print("Enter Choice: ");
+            System.out.println("\n\n\n"); 
+            System.out.println("\t\t\t\t\t------------------------------------------");
+            System.out.println("\t\t\t\t\t---     HOSPITAL MANAGEMENT SYSTEM     ---");
+            System.out.println("\t\t\t\t\t------------------------------------------");
+            System.out.println("\t\t\t\t\t1. Register New Patient");
+            System.out.println("\t\t\t\t\t2. View Staff Details");
+            System.out.println("\t\t\t\t\t3. View Staff Activity");
+            System.out.println("\t\t\t\t\t4. View Patient Activity");
+            System.out.println("\t\t\t\t\t5. View All Patients");
+            System.out.println("\t\t\t\t\t6. Doctor Diagnosis");
+            System.out.println("\t\t\t\t\t7. Generate Bill");
+            System.out.println("\t\t\t\t\t8. Search Person");
+            System.out.println("\t\t\t\t\t9. Exit");
+            System.out.println("\t\t\t\t\t------------------------------------------");
+            System.out.print("\t\t\t\t\tEnter Choice: ");
             
             int choice = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine(); // Consume newline
 
             switch (choice) {
                 case 1:
                     registerPatient();
                     break;
                 case 2:
-                    viewStaff();
+                    viewStaffDetails();
                     break;
                 case 3:
-                    viewPatients();
+                    viewStaffActivity();
                     break;
                 case 4:
-                    performDiagnosis();
+                    viewPatientActivity();
                     break;
                 case 5:
-                    billingProcess();
+                    viewPatients();
                     break;
                 case 6:
-                    searchSystem();
+                    performDiagnosis();
                     break;
                 case 7:
+                    billingProcess();
+                    break;
+                case 8:
+                    searchSystem();
+                    break;
+                case 9:
                     running = false;
-                    System.out.println("System Exiting...");
+                    System.out.println("\t\t\t\t\tSystem Exiting...");
                     break;
                 default:
-                    System.out.println("Invalid Choice!");
+                    System.out.println("\t\t\t\t\tInvalid Choice!");
             }
         }
     }
 
     private static void registerPatient() {
-        System.out.print("Enter Name: ");
+        System.out.println("\n\t\t\t\t\t                --- REGISTER PATIENT ---");
+        System.out.print("\t\t\t\t\tEnter Name: ");
         String name = scanner.nextLine();
-        System.out.print("Enter Age: ");
+        System.out.print("\t\t\t\t\tEnter Age: ");
         int age = scanner.nextInt();
         scanner.nextLine();
-        System.out.print("Enter Illness: ");
+        System.out.print("\t\t\t\t\tEnter Illness: ");
         String illness = scanner.nextLine();
         
         String id = "P" + (patientList.size() + 101); // Auto-ID
         Patient newPatient = new Patient(id, name, age, illness);
         patientList.add(newPatient);
-        System.out.println("Patient Registered Successfully! ID: " + id);
+        System.out.println("\t\t\t\t\tPatient Registered Successfully! ID: " + id);
     }
 
-    private static void viewStaff() {
-        System.out.println("\n--- STAFF ON DUTY ---");
+    // Option 2: Shows the clean list of details (ID, Name, Role)
+    private static void viewStaffDetails() {
+        System.out.println("\n\t\t\t\t\t                --- STAFF DETAILS ---");
         for (Person p : staffList) {
+            System.out.println("\t\t\t\t\t" + p);
+        }
+    }
+
+    // Option 3: Shows the polymorphic behavior (What they are doing)
+    private static void viewStaffActivity() {
+        System.out.println("\n\t\t\t\t\t                 --- STAFF ACTIVITY ---");
+        for (Person p : staffList) {
+            System.out.print("\t\t\t\t\t"); // Indent
+            p.performRole(); 
+        }
+    }
+
+    // Option 4: Shows Patient specific activity
+    private static void viewPatientActivity() {
+        System.out.println("\n\t\t\t\t\t             --- PATIENT ACTIVITY ---");
+        for (Patient p : patientList) {
+            System.out.print("\t\t\t\t\t"); // Indent
             p.performRole(); 
         }
     }
 
     private static void viewPatients() {
-        System.out.println("\n--- ADMITTED PATIENTS ---");
+        System.out.println("\n\t\t\t\t\t                         --- ADMITTED PATIENTS ---");
         for (Patient p : patientList) {
-            System.out.println(p);
+            System.out.println("\t\t\t\t\t" + p);
         }
     }
 
     private static void performDiagnosis() {
-        System.out.print("Enter Patient ID: ");
+        System.out.print("\t\t\t\t\tEnter Patient ID: ");
         String pId = scanner.nextLine();
         Patient p = (Patient) HospitalUtils.findPerson(new ArrayList<>(patientList), pId);
 
         if (p != null) {
-            System.out.print("Enter Doctor ID: ");
+            System.out.print("\t\t\t\t\tEnter Doctor ID: ");
             String dId = scanner.nextLine();
             Person staff = HospitalUtils.findPerson(staffList, dId);
             
             if (staff instanceof Doctor) {
-                System.out.print("Enter Diagnosis Details: ");
+                System.out.print("\t\t\t\t\tEnter Diagnosis Details: ");
                 String diagnosis = scanner.nextLine();
+                System.out.print("\t\t\t\t\t"); // Indent the doctor's output
                 ((Doctor) staff).diagnosePatient(p, diagnosis);
             } else {
-                System.out.println("Invalid Doctor ID.");
+                System.out.println("\t\t\t\t\tInvalid Doctor ID.");
             }
         } else {
-            System.out.println("Patient not found.");
+            System.out.println("\t\t\t\t\tPatient not found.");
         }
     }
 
     private static void billingProcess() {
-        System.out.print("Enter Patient ID: ");
+        System.out.print("\t\t\t\t\tEnter Patient ID: ");
         String id = scanner.nextLine();
         Patient p = (Patient) HospitalUtils.findPerson(new ArrayList<>(patientList), id);
 
         if (p != null) {
             HospitalBilling billing = new HospitalBilling();
-            System.out.print("Enter Bill Amount: ");
+            System.out.print("\t\t\t\t\tEnter Bill Amount: ");
             double amount = scanner.nextDouble();
             
-            System.out.print("Has Insurance? (true/false): ");
+            System.out.print("\t\t\t\t\tHas Insurance? (true/false): ");
             boolean hasInsurance = scanner.nextBoolean();
             
             if (hasInsurance) {
-                System.out.print("Enter Insurance Coverage Amount: ");
+                System.out.print("\t\t\t\t\tEnter Insurance Coverage Amount: ");
                 double coverage = scanner.nextDouble();
                 billing.generateBill(p, amount, coverage);
             } else {
                 billing.generateBill(p, amount);
             }
         } else {
-            System.out.println("Patient not found.");
+            System.out.println("\t\t\t\t\tPatient not found.");
         }
     }
 
     private static void searchSystem() {
-        System.out.println("Search by: 1. ID  2. Name & Age");
+        System.out.println("\t\t\t\t\tSearch by: 1. ID  2. Name & Age");
+        System.out.print("\t\t\t\t\tEnter Choice: ");
         int choice = scanner.nextInt();
         scanner.nextLine();
 
@@ -278,21 +336,21 @@ public class HospitalManagementSystem {
         Person result = null;
 
         if (choice == 1) {
-            System.out.print("Enter ID: ");
+            System.out.print("\t\t\t\t\tEnter ID: ");
             String id = scanner.nextLine();
             result = HospitalUtils.findPerson(allPeople, id);
         } else if (choice == 2) {
-            System.out.print("Enter Name: ");
+            System.out.print("\t\t\t\t\tEnter Name: ");
             String name = scanner.nextLine();
-            System.out.print("Enter Age: ");
+            System.out.print("\t\t\t\t\tEnter Age: ");
             int age = scanner.nextInt();
             result = HospitalUtils.findPerson(allPeople, name, age);
         }
 
         if (result != null) {
-            System.out.println("Found: " + result);
+            System.out.println("\t\t\t\t\tFound: " + result);
         } else {
-            System.out.println("Person not found.");
+            System.out.println("\t\t\t\t\tPerson not found.");
         }
     }
 }
