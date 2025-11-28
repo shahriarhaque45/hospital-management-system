@@ -8,7 +8,7 @@ public class Nurse extends Person {
     
     @Override
     public void performRole() {
-        System.out.println("  > Nurse " + getName() + " is on " + shift + " shift checking vitals.");
+        System.out.println("   > Nurse " + getName() + " is on " + shift + " shift checking vitals.");
     }
 
     @Override

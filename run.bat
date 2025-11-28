@@ -1,18 +1,21 @@
 @echo off
 title Hospital Management System
-color 0F
 
 cd /d "F:\Codes\project\HospitalManagementSystem"
 
 javac *.java
 
 if %errorlevel% neq 0 (
-    color 0C
-    echo [ERROR] Compilation failed!
+    echo.
+    echo [ERROR] Compilation Failed!
+    echo Please check the Java files for errors.
     pause
     exit /b
 )
 
+echo.
+echo Starting Hospital Management System...
+echo -------------------------------------
 java HospitalManagementSystem
 
-pause
+echo.
