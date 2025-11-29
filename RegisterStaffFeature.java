@@ -10,23 +10,23 @@ public class RegisterStaffFeature implements Feature {
     @Override
     public void execute() {
         SystemUtils.clearScreen();
-        System.out.println("------ ADD NEW STAFF ------\n\n");
-        System.out.println("          1. Doctor\n");
-        System.out.println("          2. Nurse\n\n");
+        System.out.println("                                        ------ ADD NEW STAFF ------\n\n");
+        System.out.println("                                        1. Doctor\n");
+        System.out.println("                                        2. Nurse\n\n");
         
-        int type = SystemUtils.readInt("Select Staff Type: ");
+        int type = SystemUtils.readInt("                                        Select Staff Type: ");
 
         if (type != 1 && type != 2) {
-            System.out.println("Invalid selection.");
+            System.out.println("                                        Invalid selection.");
             return;
         }
 
-        System.out.print("Enter Name: ");
+        System.out.print("                                        Enter Name: ");
         String name = SystemUtils.scanner.nextLine();
-        int age = SystemUtils.readInt("Enter Age: ");
+        int age = SystemUtils.readInt("                                        Enter Age: ");
 
         if (type == 1) { 
-            System.out.print("Enter Department: ");
+            System.out.print("                                        Enter Department: ");
             String spec = SystemUtils.scanner.nextLine();
             
             int count = 0;
@@ -36,10 +36,10 @@ public class RegisterStaffFeature implements Feature {
             String id = String.format("D%03d", count + 1);
             
             staffList.add(new Doctor(id, name, age, spec));
-            System.out.println("Success! Doctor Registered with ID: " + id);
+            System.out.println("                                        Success! Doctor Registered with ID: " + id);
             
         } else { 
-            System.out.print("Enter Shift (Day/Night): ");
+            System.out.print("                                        Enter Shift (Day/Night): ");
             String shift = SystemUtils.scanner.nextLine();
             
             int count = 0;
@@ -49,7 +49,7 @@ public class RegisterStaffFeature implements Feature {
             String id = String.format("N%03d", count + 1);
             
             staffList.add(new Nurse(id, name, age, shift));
-            System.out.println("Success! Nurse Registered with ID: " + id);
+            System.out.println("                                        Success! Nurse Registered with ID: " + id);
         }
         SystemUtils.pause();
     }

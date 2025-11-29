@@ -10,7 +10,7 @@ public class ViewStaffActivityFeature implements Feature {
     @Override
     public void execute() {
         SystemUtils.clearScreen();
-        System.out.println("------ STAFF ACTIVITY ------\n\n");
+        System.out.println("                                        ------ STAFF ACTIVITY ------\n\n");
         
         for (Person p : staffList) {
             if (p instanceof Doctor) {

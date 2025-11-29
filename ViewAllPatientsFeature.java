@@ -10,8 +10,8 @@ public class ViewAllPatientsFeature implements Feature {
     @Override
     public void execute() {
         SystemUtils.clearScreen();
-        System.out.println("------ PATIENT LIST ------\n\n");
-        for (Patient p : patientList) System.out.println(p);
+        System.out.println("                                        ------ PATIENT LIST ------\n\n");
+        for (Patient p : patientList) System.out.println("\n                    " + p);
         SystemUtils.pause();
     }
 }

@@ -14,8 +14,7 @@ if %errorlevel% neq 0 (
 )
 
 echo.
-echo Starting Hospital Management System...
-echo -------------------------------------
+
 java HospitalManagementSystem
 
 echo.

@@ -13,9 +13,9 @@ public class SystemUtils {
     }
 
     public static void pause() {
-        System.out.print("\nType 0 to go back: ");
+        System.out.print("\n                    Type 0 to go back: ");
         while (!scanner.nextLine().equals("0")) {
-            System.out.print("Type 0 to go back: ");
+            System.out.print("                    Type 0 to go back: ");
         }
     }
     

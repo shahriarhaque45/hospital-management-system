@@ -17,18 +17,18 @@ public class HospitalManagementSystem {
         boolean running = true;
         while (running) {
             SystemUtils.clearScreen();
-            System.out.println("------------------------------------------");
-            System.out.println("      HOSPITAL MANAGEMENT SYSTEM");
-            System.out.println("------------------------------------------\n\n");
+            System.out.println("                                        ------------------------------------------");
+            System.out.println("                                              HOSPITAL MANAGEMENT SYSTEM");
+            System.out.println("                                        ------------------------------------------\n\n");
             
-            System.out.println("          1. Staff Management\n");
-            System.out.println("          2. Patient Management\n");
-            System.out.println("          3. Utility Management\n");
-            System.out.println("          4. Exit System\n\n");
+            System.out.println("                                                  1. Staff Management\n");
+            System.out.println("                                                  2. Patient Management\n");
+            System.out.println("                                                  3. Utility Management\n\n");
+            System.out.println("                                                  4. Exit System\n\n");
             
-            System.out.println("------------------------------------------");
+            System.out.println("                                        ------------------------------------------");
             
-            int choice = SystemUtils.readInt("Enter Main Menu Choice: ");
+            int choice = SystemUtils.readInt("                                        Enter Main Menu Choice: ");
 
             switch (choice) {
                 case 1: staffManager.showPanel(); break;
@@ -36,9 +36,9 @@ public class HospitalManagementSystem {
                 case 3: utilityManager.showPanel(); break;
                 case 4: 
                     running = false; 
-                    System.out.println("\nSystem Exiting.");
+                    System.out.println("\n                                        System Exiting.");
                     break;
-                default: System.out.println("Invalid Choice!"); SystemUtils.pause();
+                default: System.out.println("                                        Invalid Choice!"); SystemUtils.pause();
             }
         }
     }
@@ -64,21 +64,21 @@ public class HospitalManagementSystem {
             boolean back = false;
             while (!back) {
                 SystemUtils.clearScreen();
-                System.out.println("------ STAFF MANAGEMENT PANEL ------\n\n");
+                System.out.println("                                        ------ STAFF MANAGEMENT PANEL ------\n\n");
                 
-                System.out.println("          1. Add New Staff\n");
-                System.out.println("          2. View Staff List\n");
-                System.out.println("          3. View Staff Activity\n");
-                System.out.println("          4. Back to Main Menu\n\n");
+                System.out.println("                                                  1. Add New Staff\n");
+                System.out.println("                                                  2. View Staff List\n");
+                System.out.println("                                                  3. View Staff Activity\n\n");
+                System.out.println("                                                  4. Back to Main Menu\n\n");
                 
-                int choice = SystemUtils.readInt("Enter Choice: ");
+                int choice = SystemUtils.readInt("                                        Enter Choice: ");
                 
                 switch (choice) {
                     case 1: new RegisterStaffFeature(staffList).execute(); break;
                     case 2: new ViewStaffListFeature(staffList).execute(); break;
                     case 3: new ViewStaffActivityFeature(staffList).execute(); break;
                     case 4: back = true; break;
-                    default: System.out.println("Invalid option."); SystemUtils.pause();
+                    default: System.out.println("                                        Invalid option."); SystemUtils.pause();
                 }
             }
         }
@@ -95,15 +95,15 @@ public class HospitalManagementSystem {
             boolean back = false;
             while (!back) {
                 SystemUtils.clearScreen();
-                System.out.println("------ PATIENT MANAGEMENT PANEL ------\n\n");
+                System.out.println("                                        ------ PATIENT MANAGEMENT PANEL ------\n\n");
                 
-                System.out.println("          1. Register New Patient\n");
-                System.out.println("          2. View All Patients\n");
-                System.out.println("          3. View Patients Status\n");
-                System.out.println("          4. Discharge Patient\n");
-                System.out.println("          5. Back to Main Menu\n\n");
+                System.out.println("                                                  1. Register New Patient\n");
+                System.out.println("                                                  2. View All Patients\n");
+                System.out.println("                                                  3. View Patients Status\n");
+                System.out.println("                                                  4. Discharge Patient\n\n");
+                System.out.println("                                                  5. Back to Main Menu\n\n");
                 
-                int choice = SystemUtils.readInt("Enter Choice: ");
+                int choice = SystemUtils.readInt("                                        Enter Choice: ");
                 
                 switch (choice) {
                     case 1: new RegisterPatientFeature(patientList).execute(); break;
@@ -111,7 +111,7 @@ public class HospitalManagementSystem {
                     case 3: new ViewPatientStatusFeature(patientList).execute(); break;
                     case 4: new DischargePatientFeature(patientList).execute(); break;
                     case 5: back = true; break;
-                    default: System.out.println("Invalid option."); SystemUtils.pause();
+                    default: System.out.println("                                        Invalid option."); SystemUtils.pause();
                 }
             }
         }
@@ -132,21 +132,21 @@ public class HospitalManagementSystem {
             boolean back = false;
             while (!back) {
                 SystemUtils.clearScreen();
-                System.out.println("------ UTILITY MANAGEMENT PANEL ------\n\n");
+                System.out.println("                                        ------ UTILITY MANAGEMENT PANEL ------\n\n");
                 
-                System.out.println("          1. General Statistics\n");
-                System.out.println("          2. Check Bed Availability\n");
-                System.out.println("          3. Global Search\n");
-                System.out.println("          4. Back to Main Menu\n\n");
+                System.out.println("                                                  1. General Statistics\n");
+                System.out.println("                                                  2. Check Bed Availability\n");
+                System.out.println("                                                  3. Global Search\n\n");
+                System.out.println("                                                  4. Back to Main Menu\n\n");
 
-                int choice = SystemUtils.readInt("Enter Choice: ");
+                int choice = SystemUtils.readInt("                                        Enter Choice: ");
 
                 switch (choice) {
                     case 1: new GenerateStatisticsFeature(staffList, patientList).execute(); break;
                     case 2: new CheckBedAvailabilityFeature(patientList, maxBeds).execute(); break;
                     case 3: new GlobalSearchFeature(staffList, patientList).execute(); break;
                     case 4: back = true; break;
-                    default: System.out.println("Invalid option."); SystemUtils.pause();
+                    default: System.out.println("                                        Invalid option."); SystemUtils.pause();
                 }
             }
         }
