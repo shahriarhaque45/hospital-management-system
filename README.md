@@ -26,11 +26,6 @@ CuraLink is a simple, command-line based hospital management system written in J
   - The application state (staff and patient lists) is automatically saved to `database/curalink.dat` upon exit.
   - On startup, the application loads data from the save file if it exists.
 
-- **Testing Mode**:
-  - A "testing mode" can be activated from the main menu.
-  - This loads a default set of data for demonstration and testing purposes.
-  - Changes made in testing mode are not saved, ensuring the primary data file is not overwritten.
-
 ## Project Structure
 
 The project is organized into several packages to maintain a clean and modular architecture:
@@ -58,6 +53,17 @@ A shell script `run.sh` is provided to compile and run the project automatically
     ./run.sh
     ```
 
+### Using the Script (for Windows)
+
+A batch script `run.bat` is provided to compile and run the project automatically. Simply navigate to the project's root directory and execute the script.
+
+1.  **Run from Command Prompt:**
+    ```batch
+    run.bat
+    ```
+
+2.  **Or, run by double-clicking the `run.bat` file in File Explorer.**
+
 ### Manual Compilation and Execution
 
 If you prefer to compile and run the project manually, you can use the following commands from the project's root directory.
@@ -77,4 +83,3 @@ If you prefer to compile and run the project manually, you can use the following
 The application stores its data in the `database` directory:
 
 - `database/curalink.dat`: This is the primary save file where all current staff and patient data is stored when you exit the application.
-- `database/default.dat`: This file contains the default data for the testing mode. It is created automatically on the first run if it doesn't exist.

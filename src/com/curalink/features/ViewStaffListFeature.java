@@ -21,12 +21,12 @@ public class ViewStaffListFeature implements Feature {
         if (staffList.isEmpty()) {
             System.out.println("\t\t\t\t\tEmpty Database");
         } else {
-            System.out.println("\t\t\t\t\tDoctors:");
+            System.out.println("\t\t\tDoctors:");
             for (Person p : staffList) {
                 if (p instanceof Doctor) System.out.println("\n\t\t\t" + p);
             }
             
-            System.out.println("\n\t\t\t\t\tNurses:");
+            System.out.println("\n\t\t\tNurses:");
             for (Person p : staffList) {
                 if (p instanceof Nurse) System.out.println("\n\t\t\t" + p);
             }

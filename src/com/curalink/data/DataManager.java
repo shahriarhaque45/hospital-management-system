@@ -14,7 +14,6 @@ import java.util.Map;
 public class DataManager {
     private static final String DB_DIR = "database";
     private static final String SAVE_FILE = DB_DIR + "/curalink.dat";
-    private static final String DEFAULT_FILE = DB_DIR + "/default.dat";
 
     public static void saveData(List<Person> staffList, List<Patient> patientList) {
         Map<String, List<?>> data = new HashMap<>();
@@ -36,37 +35,6 @@ public class DataManager {
             emptyData.put("patients", new ArrayList<Patient>());
             return emptyData;
         }
-    }
-
-    public static Map<String, List<?>> loadDefaultData() {
-        File defaultFile = new File(DEFAULT_FILE);
-        if (defaultFile.exists()) {
-            System.out.println("Loading default data from " + DEFAULT_FILE);
-            return loadDataObject(DEFAULT_FILE);
-        } else {
-            System.out.println("No default data file found. Creating and loading default data.");
-            Map<String, List<?>> defaultData = createDefaultData();
-            saveDataObject(defaultData, DEFAULT_FILE);
-            return defaultData;
-        }
-    }
-
-    private static Map<String, List<?>> createDefaultData() {
-        Map<String, List<?>> data = new HashMap<>();
-        List<Person> staffList = new ArrayList<>();
-        List<Patient> patientList = new ArrayList<>();
-
-        staffList.add(new Doctor("D001", "Dr. Anisur Rahman", 45, "Cardiology"));
-        staffList.add(new Doctor("D002", "Dr. Fatema Begum", 50, "Neurology"));
-        staffList.add(new Nurse("N001", "Shirin Akter", 29, "Night"));
-        staffList.add(new Nurse("N002", "Rahim Uddin", 32, "Day"));
-        
-        patientList.add(new Patient("P001", "Rafiqul Islam", 30, "Chest Pain"));
-        patientList.add(new Patient("P002", "Karim Ahmed", 45, "High Fever"));
-
-        data.put("staff", staffList);
-        data.put("patients", patientList);
-        return data;
     }
 
     private static void saveDataObject(Map<String, List<?>> data, String filename) {
