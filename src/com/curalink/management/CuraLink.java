@@ -27,18 +27,18 @@ public class CuraLink {
         boolean running = true;
         while (running) {
             SystemUtils.clearScreen();
-            System.out.println("                                        ------------------------------------------");
-            System.out.println("                                                  HOSPITAL MANAGEMENT SYSTEM");
-            System.out.println("                                        ------------------------------------------\n\n");
+            System.out.println("\t\t\t\t\t------------------------------------------");
+            System.out.println("\t\t\t\t\t\t  HOSPITAL MANAGEMENT SYSTEM");
+            System.out.println("\t\t\t\t\t------------------------------------------\n\n");
             
-            System.out.println("                                                  1. Staff Management\n");
-            System.out.println("                                                  2. Patient Management\n");
-            System.out.println("                                                  3. Utility Management\n\n");
-            System.out.println("                                                  4. Exit System\n\n");
+            System.out.println("\t\t\t\t\t\t  1. Staff Management\n");
+            System.out.println("\t\t\t\t\t\t  2. Patient Management\n");
+            System.out.println("\t\t\t\t\t\t  3. Utility Management\n\n");
+            System.out.println("\t\t\t\t\t\t  4. Exit System\n\n");
             
-            System.out.println("                                        ------------------------------------------");
+            System.out.println("\t\t\t\t\t------------------------------------------");
             
-            int choice = SystemUtils.readInt("                                        Enter Main Menu Choice: ");
+            int choice = SystemUtils.readInt("\t\t\t\t\tEnter Main Menu Choice: ");
 
             switch (choice) {
                 case 1: staffManager.showPanel(); break;
@@ -46,9 +46,9 @@ public class CuraLink {
                 case 3: utilityManager.showPanel(); break;
                 case 4: 
                     running = false; 
-                    System.out.println("\n                                        System Exiting.");
+                    System.out.println("\n\t\t\t\t\tSystem Exiting.");
                     break;
-                default: System.out.println("                                        Invalid Choice!"); SystemUtils.pause();
+                default: System.out.println("\t\t\t\t\tInvalid Choice!"); SystemUtils.pause();
             }
         }
     }

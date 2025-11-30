@@ -14,17 +14,17 @@ public class RegisterPatientFeature implements Feature {
     @Override
     public void execute() {
         SystemUtils.clearScreen();
-        System.out.println("                                        ------ NEW PATIENT REGISTRATION ------\n\n");
-        System.out.print("                                        Enter Name: ");
+        System.out.println("\t\t\t\t\t------ NEW PATIENT REGISTRATION ------\n\n");
+        System.out.print("\t\t\t\t\tEnter Name: ");
         String name = SystemUtils.scanner.nextLine();
-        int age = SystemUtils.readInt("                                        Enter Age: ");
-        System.out.print("                                        Enter Complaint/Illness: ");
+        int age = SystemUtils.readInt("\t\t\t\t\tEnter Age: ");
+        System.out.print("\t\t\t\t\tEnter Complaint/Illness: ");
         String illness = SystemUtils.scanner.nextLine();
         
         String id = String.format("P%03d", patientList.size() + 1); 
         Patient newPatient = new Patient(id, name, age, illness);
         patientList.add(newPatient);
-        System.out.println("                                        Success! Patient Registered with ID: " + id);
+        System.out.println("\t\t\t\t\tSuccess! Patient Registered with ID: " + id);
         SystemUtils.pause();
     }
 }

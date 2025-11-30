@@ -14,7 +14,7 @@ public class ViewPatientStatusFeature implements Feature {
     @Override
     public void execute() {
         SystemUtils.clearScreen();
-        System.out.println("                                        ------ PATIENT STATUS ------\n\n");
+        System.out.println("\t\t\t\t\t------ PATIENT STATUS ------\n\n");
         for (Patient p : patientList) {
             p.performRole();
         }

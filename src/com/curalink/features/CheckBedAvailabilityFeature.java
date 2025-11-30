@@ -16,20 +16,20 @@ public class CheckBedAvailabilityFeature implements Feature {
     @Override
     public void execute() {
         SystemUtils.clearScreen();
-        System.out.println("                                        ------ BED AVAILABILITY ------\n\n");
+        System.out.println("\t\t\t\t\t------ BED AVAILABILITY ------\n\n");
         int occupied = patientList.size();
         int available = maxBeds - occupied;
         
-        System.out.println("                                        Max Capacity : " + maxBeds);
-        System.out.println("                                        Occupied     : " + occupied);
-        System.out.println("                                        Available    : " + available);
+        System.out.println("\t\t\t\t\tMax Capacity : " + maxBeds);
+        System.out.println("\t\t\t\t\tOccupied     : " + occupied);
+        System.out.println("\t\t\t\t\tAvailable    : " + available);
         
         if (available == 0) {
-            System.out.println("\n                                        WARNING: No beds available!");
+            System.out.println("\n\t\t\t\t\tWARNING: No beds available!");
         } else if (available < 5) {
-            System.out.println("\n                                        ALERT: Hospital is reaching capacity.");
+            System.out.println("\n\t\t\t\t\tALERT: Hospital is reaching capacity.");
         } else {
-            System.out.println("\n                                        Status: Normal capacity.");
+            System.out.println("\n\t\t\t\t\tStatus: Normal capacity.");
         }
         SystemUtils.pause();
     }

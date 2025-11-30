@@ -16,16 +16,16 @@ public class ViewStaffListFeature implements Feature {
     @Override
     public void execute() {
         SystemUtils.clearScreen();
-        System.out.println("                                        ------ STAFF LIST ------\n\n");
+        System.out.println("\t\t\t\t\t------ STAFF LIST ------\n\n");
         
-        System.out.println("                                        Doctors:");
+        System.out.println("\t\t\t\t\tDoctors:");
         for (Person p : staffList) {
-            if (p instanceof Doctor) System.out.println("\n                    " + p);
+            if (p instanceof Doctor) System.out.println("\n\t\t\t" + p);
         }
         
-        System.out.println("\n                                        Nurses:");
+        System.out.println("\n\t\t\t\t\tNurses:");
         for (Person p : staffList) {
-            if (p instanceof Nurse) System.out.println("\n                    " + p);
+            if (p instanceof Nurse) System.out.println("\n\t\t\t" + p);
         }
         SystemUtils.pause();
     }

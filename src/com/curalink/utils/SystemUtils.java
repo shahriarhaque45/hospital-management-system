@@ -15,13 +15,12 @@ public class SystemUtils {
     }
 
     public static void pause() {
-        System.out.print("\n                    Type 0 to go back: ");
-        while (!scanner.nextLine().equals("0")) {
-            System.out.print("                    Type 0 to go back: ");
-        }
+        System.out.print("\nPress Enter to go back...");
+        scanner.nextLine();
     }
     
     public static void clearScreen() {
-        System.out.print("\n\n");
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

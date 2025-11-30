@@ -18,12 +18,12 @@ public class GlobalSearchFeature implements Feature {
     @Override
     public void execute() {
         SystemUtils.clearScreen();
-        System.out.println("                                        ------ GLOBAL SEARCH ------\n\n");
+        System.out.println("\t\t\t\t\t------ GLOBAL SEARCH ------\n\n");
         
-        System.out.println("                                        1. Search by ID\n");
-        System.out.println("                                        2. Search by Name & Age\n\n");
+        System.out.println("\t\t\t\t\t1. Search by ID\n");
+        System.out.println("\t\t\t\t\t2. Search by Name & Age\n\n");
         
-        int choice = SystemUtils.readInt("                                        Select method: ");
+        int choice = SystemUtils.readInt("\t\t\t\t\tSelect method: ");
 
         List<Person> allPeople = new ArrayList<>();
         allPeople.addAll(staffList);
@@ -31,20 +31,20 @@ public class GlobalSearchFeature implements Feature {
         Person result = null;
 
         if (choice == 1) {
-            System.out.print("                                        Enter ID: ");
+            System.out.print("\t\t\t\t\tEnter ID: ");
             String id = SystemUtils.scanner.nextLine();
             result = findPerson(allPeople, id);
         } else if (choice == 2) {
-            System.out.print("                                        Enter Name: ");
+            System.out.print("\t\t\t\t\tEnter Name: ");
             String name = SystemUtils.scanner.nextLine();
-            int age = SystemUtils.readInt("                                        Enter Age: ");
+            int age = SystemUtils.readInt("\t\t\t\t\tEnter Age: ");
             result = findPerson(allPeople, name, age);
         }
 
         if (result != null) {
-            System.out.println("\n                                        Result Found: " + result);
+            System.out.println("\n\t\t\t\t\tResult Found: " + result);
         } else {
-            System.out.println("\n                                        No records found.");
+            System.out.println("\n\t\t\t\t\tNo records found.");
         }
         SystemUtils.pause();
     }

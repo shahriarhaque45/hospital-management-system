@@ -10,7 +10,7 @@ public class Doctor extends Person {
    
     @Override
     public void performRole() {
-        System.out.println("                     > Doctor " + getName() + " (" + specialization + ") is seeing patients.");
+        System.out.println("\t\t     > Doctor " + getName() + " (" + specialization + ") is seeing patients.");
     }
 
     @Override

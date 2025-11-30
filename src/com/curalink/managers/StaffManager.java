@@ -18,21 +18,21 @@ public class StaffManager {
         boolean back = false;
         while (!back) {
             SystemUtils.clearScreen();
-            System.out.println("                                        ------ STAFF MANAGEMENT PANEL ------\n\n");
+            System.out.println("\t\t\t\t\t------ STAFF MANAGEMENT PANEL ------\n\n");
             
-            System.out.println("                                                  1. Add New Staff\n");
-            System.out.println("                                                  2. View Staff List\n");
-            System.out.println("                                                  3. View Staff Activity\n\n");
-            System.out.println("                                                  4. Back to Main Menu\n\n");
+            System.out.println("\t\t\t\t\t\t  1. Add New Staff\n");
+            System.out.println("\t\t\t\t\t\t  2. View Staff List\n");
+            System.out.println("\t\t\t\t\t\t  3. View Staff Activity\n\n");
+            System.out.println("\t\t\t\t\t\t  4. Back to Main Menu\n\n");
             
-            int choice = SystemUtils.readInt("                                        Enter Choice: ");
+            int choice = SystemUtils.readInt("\t\t\t\t\tEnter Choice: ");
             
             switch (choice) {
                 case 1: new RegisterStaffFeature(staffList).execute(); break;
                 case 2: new ViewStaffListFeature(staffList).execute(); break;
                 case 3: new ViewStaffActivityFeature(staffList).execute(); break;
                 case 4: back = true; break;
-                default: System.out.println("                                        Invalid option."); SystemUtils.pause();
+                default: System.out.println("\t\t\t\t\tInvalid option."); SystemUtils.pause();
             }
         }
     }

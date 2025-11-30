@@ -23,21 +23,21 @@ public class UtilityManager {
         boolean back = false;
         while (!back) {
             SystemUtils.clearScreen();
-            System.out.println("                                        ------ UTILITY MANAGEMENT PANEL ------\n\n");
+            System.out.println("\t\t\t\t\t------ UTILITY MANAGEMENT PANEL ------\n\n");
             
-            System.out.println("                                                  1. General Statistics\n");
-            System.out.println("                                                  2. Check Bed Availability\n");
-            System.out.println("                                                  3. Global Search\n\n");
-            System.out.println("                                                  4. Back to Main Menu\n\n");
+            System.out.println("\t\t\t\t\t\t  1. General Statistics\n");
+            System.out.println("\t\t\t\t\t\t  2. Check Bed Availability\n");
+            System.out.println("\t\t\t\t\t\t  3. Global Search\n\n");
+            System.out.println("\t\t\t\t\t\t  4. Back to Main Menu\n\n");
 
-            int choice = SystemUtils.readInt("                                        Enter Choice: ");
+            int choice = SystemUtils.readInt("\t\t\t\t\tEnter Choice: ");
 
             switch (choice) {
                 case 1: new GenerateStatisticsFeature(staffList, patientList).execute(); break;
                 case 2: new CheckBedAvailabilityFeature(patientList, maxBeds).execute(); break;
                 case 3: new GlobalSearchFeature(staffList, patientList).execute(); break;
                 case 4: back = true; break;
-                default: System.out.println("                                        Invalid option."); SystemUtils.pause();
+                default: System.out.println("\t\t\t\t\tInvalid option."); SystemUtils.pause();
             }
         }
     }
