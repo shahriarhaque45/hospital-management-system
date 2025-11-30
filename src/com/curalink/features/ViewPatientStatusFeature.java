@@ -15,8 +15,12 @@ public class ViewPatientStatusFeature implements Feature {
     public void execute() {
         SystemUtils.clearScreen();
         System.out.println("\t\t\t\t\t------ PATIENT STATUS ------\n\n");
-        for (Patient p : patientList) {
-            p.performRole();
+        if (patientList.isEmpty()) {
+            System.out.println("\t\t\t\t\tEmpty Database");
+        } else {
+            for (Patient p : patientList) {
+                p.performRole();
+            }
         }
         SystemUtils.pause();
     }

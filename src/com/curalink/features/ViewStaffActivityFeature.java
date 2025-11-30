@@ -18,15 +18,19 @@ public class ViewStaffActivityFeature implements Feature {
         SystemUtils.clearScreen();
         System.out.println("\t\t\t\t\t------ STAFF ACTIVITY ------\n\n");
         
-        for (Person p : staffList) {
-            if (p instanceof Doctor) {
-                p.performRole();
+        if (staffList.isEmpty()) {
+            System.out.println("\t\t\t\t\tEmpty Database");
+        } else {
+            for (Person p : staffList) {
+                if (p instanceof Doctor) {
+                    p.performRole();
+                }
             }
-        }
-        System.out.println(); 
-        for (Person p : staffList) {
-            if (p instanceof Nurse) {
-                p.performRole();
+            System.out.println(); 
+            for (Person p : staffList) {
+                if (p instanceof Nurse) {
+                    p.performRole();
+                }
             }
         }
         SystemUtils.pause();

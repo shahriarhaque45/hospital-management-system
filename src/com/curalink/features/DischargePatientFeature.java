@@ -15,7 +15,19 @@ public class DischargePatientFeature implements Feature {
     public void execute() {
         SystemUtils.clearScreen();
         System.out.println("\t\t\t\t\t------ DISCHARGE PATIENT ------\n\n");
-        System.out.print("\t\t\t\t Enter Patient ID to Discharge: ");
+
+        System.out.println("\t\t\t\t\tCurrent Admitted Patients:");
+        if (patientList.isEmpty()) {
+            System.out.println("\n\t\t\t\t\tNo patients to discharge.");
+            SystemUtils.pause();
+            return;
+        }
+        for (Patient p : patientList) {
+            System.out.println("\t\t\t\t\t  " + p);
+        }
+        System.out.println("\n\t\t\t\t\t-----------------------------------");
+
+        System.out.print("\n\t\t\t\t Enter Patient ID to Discharge: ");
         String id = SystemUtils.scanner.nextLine();
         
         Patient p = null;

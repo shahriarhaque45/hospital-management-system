@@ -15,7 +15,7 @@ public class SystemUtils {
     }
 
     public static void pause() {
-        System.out.print("\nPress Enter to go back...");
+        System.out.print("\n\t\t\t\t\tPress Enter to go back...");
         scanner.nextLine();
     }
     

@@ -15,7 +15,13 @@ public class ViewAllPatientsFeature implements Feature {
     public void execute() {
         SystemUtils.clearScreen();
         System.out.println("\t\t\t\t\t------ PATIENT LIST ------\n\n");
-        for (Patient p : patientList) System.out.println("\n\t\t\t" + p);
+        if (patientList.isEmpty()) {
+            System.out.println("\t\t\t\t\tEmpty Database");
+        } else {
+            for (Patient p : patientList) {
+                System.out.println("\n\t\t\t" + p);
+            }
+        }
         SystemUtils.pause();
     }
 }
