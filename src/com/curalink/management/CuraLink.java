@@ -1,24 +1,27 @@
 package com.curalink.management;
 
+import com.curalink.data.DataManager;
 import com.curalink.managers.PatientManager;
 import com.curalink.managers.StaffManager;
 import com.curalink.managers.UtilityManager;
-import com.curalink.models.Doctor;
-import com.curalink.models.Nurse;
 import com.curalink.models.Patient;
 import com.curalink.models.Person;
 import com.curalink.utils.SystemUtils;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CuraLink {
     
-    private static List<Person> staffList = new ArrayList<>();
-    private static List<Patient> patientList = new ArrayList<>();
-    private static final int MAX_BEDS = 50; 
+    private static List<Person> staffList;
+    private static List<Patient> patientList;
+    private static final int MAX_BEDS = 50;
+    private static boolean isTestingMode = false;
 
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) {
-        initializeData();
+        Map<String, List<?>> data = DataManager.loadPrimaryData();
+        staffList = (List<Person>) data.get("staff");
+        patientList = (List<Patient>) data.get("patients");
         
         StaffManager staffManager = new StaffManager(staffList);
         PatientManager patientManager = new PatientManager(patientList);
@@ -29,12 +32,16 @@ public class CuraLink {
             SystemUtils.clearScreen();
             System.out.println("\t\t\t\t\t------------------------------------------");
             System.out.println("\t\t\t\t\t\t  HOSPITAL MANAGEMENT SYSTEM");
+            if (isTestingMode) {
+                System.out.println("\t\t\t\t\t\t      (TESTING MODE)");
+            }
             System.out.println("\t\t\t\t\t------------------------------------------\n\n");
             
             System.out.println("\t\t\t\t\t\t  1. Staff Management\n");
             System.out.println("\t\t\t\t\t\t  2. Patient Management\n");
-            System.out.println("\t\t\t\t\t\t  3. Utility Management\n\n");
-            System.out.println("\t\t\t\t\t\t  4. Exit System\n\n");
+            System.out.println("\t\t\t\t\t\t  3. Utility Management\n");
+            System.out.println("\t\t\t\t\t\t  4. Load Default (Test) Data\n\n");
+            System.out.println("\t\t\t\t\t\t  5. Exit System\n\n");
             
             System.out.println("\t\t\t\t\t------------------------------------------");
             
@@ -44,22 +51,30 @@ public class CuraLink {
                 case 1: staffManager.showPanel(); break;
                 case 2: patientManager.showPanel(); break;
                 case 3: utilityManager.showPanel(); break;
-                case 4: 
+                case 4:
+                    Map<String, List<?>> defaultData = DataManager.loadDefaultData();
+                    staffList = (List<Person>) defaultData.get("staff");
+                    patientList = (List<Patient>) defaultData.get("patients");
+
+                    staffManager = new StaffManager(staffList);
+                    patientManager = new PatientManager(patientList);
+                    utilityManager = new UtilityManager(staffList, patientList, MAX_BEDS);
+                    
+                    isTestingMode = true;
+                    System.out.println("\n\t\t\t\t\tIn testing mode, default data loaded. Changes will not be saved.");
+                    SystemUtils.pause();
+                    break;
+                case 5: 
+                    if (isTestingMode) {
+                        System.out.println("\n\t\t\t\t\tExiting test mode without saving.");
+                    } else {
+                        DataManager.saveData(staffList, patientList);
+                    }
                     running = false; 
                     System.out.println("\n\t\t\t\t\tSystem Exiting.");
                     break;
                 default: System.out.println("\t\t\t\t\tInvalid Choice!"); SystemUtils.pause();
             }
         }
-    }
-
-    private static void initializeData() {
-        staffList.add(new Doctor("D001", "Dr. Anisur Rahman", 45, "Cardiology"));
-        staffList.add(new Doctor("D002", "Dr. Fatema Begum", 50, "Neurology"));
-        staffList.add(new Nurse("N001", "Shirin Akter", 29, "Night"));
-        staffList.add(new Nurse("N002", "Rahim Uddin", 32, "Day"));
-        
-        patientList.add(new Patient("P001", "Rafiqul Islam", 30, "Chest Pain"));
-        patientList.add(new Patient("P002", "Karim Ahmed", 45, "High Fever"));
     }
 }

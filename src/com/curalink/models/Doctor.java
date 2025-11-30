@@ -1,6 +1,6 @@
 package com.curalink.models;
 
-public class Doctor extends Person {
+public class Doctor extends Person implements java.io.Serializable {
     private String specialization;
 
     public Doctor(String id, String name, int age, String specialization) {
